@@ -43,113 +43,109 @@ import org.retest.swingset3.demos.ResourceManager;
  * @version 1.9 11/17/05
  * @author Jeff Dinkins
  */
-@DemoProperties(
-        value = "ToolTips Demo",
-        category = "General",
-        description = "Demonstrates how tooltips can be easily added to Swing GUI components",
-        sourceFiles = {
-                "org/retest/swingset3/demos/tooltip/ToolTipDemo.java",
-                "org/retest/swingset3/demos/ResourceManager.java",
-                "org/retest/swingset3/demos/tooltip/resources/ToolTipDemo.properties",
-                "org/retest/swingset3/demos/tooltip/resources/images/tooltip_background.png",
-                "org/retest/swingset3/demos/tooltip/resources/images/ToolTipDemo.gif"
-                }
-)
+@DemoProperties( value = "ToolTips Demo", category = "General",
+		description = "Demonstrates how tooltips can be easily added to Swing GUI components",
+		sourceFiles = { "org/retest/swingset3/demos/tooltip/ToolTipDemo.java",
+				"org/retest/swingset3/demos/ResourceManager.java",
+				"org/retest/swingset3/demos/tooltip/resources/ToolTipDemo.properties",
+				"org/retest/swingset3/demos/tooltip/resources/images/tooltip_background.png",
+				"org/retest/swingset3/demos/tooltip/resources/images/ToolTipDemo.gif" } )
 public class ToolTipDemo extends JPanel {
-    private final ResourceManager resourceManager = new ResourceManager(this.getClass());
+	private final ResourceManager resourceManager = new ResourceManager( this.getClass() );
 
-    /**
-     * main method allows us to run as a standalone demo.
-     */
-    public static void main(String[] args) {
-        JFrame frame = new JFrame(ToolTipDemo.class.getAnnotation(DemoProperties.class).value());
+	/**
+	 * main method allows us to run as a standalone demo.
+	 */
+	public static void main( String[] args ) {
+		JFrame frame = new JFrame( ToolTipDemo.class.getAnnotation( DemoProperties.class ).value() );
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new ToolTipDemo());
-        frame.setPreferredSize(new Dimension(800, 600));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
+		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		frame.getContentPane().add( new ToolTipDemo() );
+		frame.setPreferredSize( new Dimension( 800, 600 ) );
+		frame.pack();
+		frame.setLocationRelativeTo( null );
+		frame.setVisible( true );
+	}
 
-    /**
-     * ToolTipDemo Constructor
-     */
-    public ToolTipDemo() {
-        setLayout(new BorderLayout());
+	/**
+	 * ToolTipDemo Constructor
+	 */
+	public ToolTipDemo() {
+		setLayout( new BorderLayout() );
 
-        // Create a panel which contains specific tooltip regions.
-        Toolbox toolbox = new Toolbox();
+		// Create a panel which contains specific tooltip regions.
+		Toolbox toolbox = new Toolbox();
 
-        add(toolbox, BorderLayout.CENTER);
-    }
+		add( toolbox, BorderLayout.CENTER );
+	}
 
-    public class Toolbox extends JPanel {
-        private final Rectangle plainRect = new Rectangle(44, 0, 186, 128);
-        private final Rectangle htmlRect = new Rectangle(240, 134, 186, 186);
-        private final Rectangle styledRect = new Rectangle(45, 327, 188, 134);
+	public class Toolbox extends JPanel {
+		private final Rectangle plainRect = new Rectangle( 44, 0, 186, 128 );
+		private final Rectangle htmlRect = new Rectangle( 240, 134, 186, 186 );
+		private final Rectangle styledRect = new Rectangle( 45, 327, 188, 134 );
 
-        private final JLabel background;
-        private final JComponent plainToolTipRegion;
-        private final JComponent htmlToolTipRegion;
-        private final JComponent styledToolTipRegion;
+		private final JLabel background;
+		private final JComponent plainToolTipRegion;
+		private final JComponent htmlToolTipRegion;
+		private final JComponent styledToolTipRegion;
 
-        public Toolbox() {
-            setLayout(null);
+		public Toolbox() {
+			setLayout( null );
 
-            background = new JLabel(resourceManager.createImageIcon("tooltip_background.png",
-                    resourceManager.getString("ToolTipDemo.toolbox")));
+			background = new JLabel( resourceManager.createImageIcon( "tooltip_background.png",
+					resourceManager.getString( "ToolTipDemo.toolbox" ) ) );
 
-            background.setVerticalAlignment(JLabel.TOP);
-            background.setHorizontalAlignment(JLabel.LEFT);
+			background.setVerticalAlignment( JLabel.TOP );
+			background.setHorizontalAlignment( JLabel.LEFT );
 
-            // Note: tooltip text isn't retrieved from properties file in order
-            // to make this code easier to understand
+			// Note: tooltip text isn't retrieved from properties file in order
+			// to make this code easier to understand
 
-            //<snip>Create region for displaying plain tooltip
-            plainToolTipRegion = createToolTipRegion(resourceManager.getString("ToolTipDemo.plain"));
-            plainToolTipRegion.setToolTipText("A simple one line tip.");
-            //</snip>
+			//<snip>Create region for displaying plain tooltip
+			plainToolTipRegion = createToolTipRegion( resourceManager.getString( "ToolTipDemo.plain" ) );
+			plainToolTipRegion.setToolTipText( "A simple one line tip." );
+			//</snip>
 
-            //<snip>Create region for displaying HTML tooltip
-            htmlToolTipRegion = createToolTipRegion(resourceManager.getString("ToolTipDemo.html"));
-            htmlToolTipRegion.setToolTipText("<html><body bgcolor=\"#AABBFF\">In case you thought that tooltips had to be<p>" +
-                    "boring, one line descriptions, the <font color=blue size=+2>Swing!</font> team<p>" +
-                    "is happy to shatter your illusions.<p>" +
-                    "In Swing, you can use HTML to <ul><li>Have Lists<li><b>Bold</b> text<li><em>emphasized</em>" +
-                    "text<li>text with <font color=red>Color</font><li>text in different <font size=+3>sizes</font>" +
-                    "<li>and <font face=AvantGarde>Fonts</font></ul>Oh, and they can be multi-line, too.</body></html>");
-            //</snip>
+			//<snip>Create region for displaying HTML tooltip
+			htmlToolTipRegion = createToolTipRegion( resourceManager.getString( "ToolTipDemo.html" ) );
+			htmlToolTipRegion
+					.setToolTipText( "<html><body bgcolor=\"#AABBFF\">In case you thought that tooltips had to be<p>"
+							+ "boring, one line descriptions, the <font color=blue size=+2>Swing!</font> team<p>"
+							+ "is happy to shatter your illusions.<p>"
+							+ "In Swing, you can use HTML to <ul><li>Have Lists<li><b>Bold</b> text<li><em>emphasized</em>"
+							+ "text<li>text with <font color=red>Color</font><li>text in different <font size=+3>sizes</font>"
+							+ "<li>and <font face=AvantGarde>Fonts</font></ul>Oh, and they can be multi-line, too.</body></html>" );
+			//</snip>
 
-            //<snip>Create region for displaying styled tooltip            
-            styledToolTipRegion = createToolTipRegion(resourceManager.getString("ToolTipDemo.styled"));
-            styledToolTipRegion.setToolTipText("<html>Tips can be styled to be" +
-                    "<br><b>interesting</b> and <i>fun</i></html>");
-            //</snip>
+			//<snip>Create region for displaying styled tooltip            
+			styledToolTipRegion = createToolTipRegion( resourceManager.getString( "ToolTipDemo.styled" ) );
+			styledToolTipRegion.setToolTipText(
+					"<html>Tips can be styled to be" + "<br><b>interesting</b> and <i>fun</i></html>" );
+			//</snip>
 
-            add(htmlToolTipRegion);
-            add(styledToolTipRegion);
-            add(plainToolTipRegion);
+			add( htmlToolTipRegion );
+			add( styledToolTipRegion );
+			add( plainToolTipRegion );
 
-            add(background);
-        }
+			add( background );
+		}
 
-        public void doLayout() {
-            background.setBounds(0, 0, getWidth(), getHeight());
-            plainToolTipRegion.setBounds(plainRect);
-            htmlToolTipRegion.setBounds(htmlRect);
-            styledToolTipRegion.setBounds(styledRect);
-        }
+		public void doLayout() {
+			background.setBounds( 0, 0, getWidth(), getHeight() );
+			plainToolTipRegion.setBounds( plainRect );
+			htmlToolTipRegion.setBounds( htmlRect );
+			styledToolTipRegion.setBounds( styledRect );
+		}
 
-        private JComponent createToolTipRegion(String text) {
-            JLabel region = new JLabel(text);
+		private JComponent createToolTipRegion( String text ) {
+			JLabel region = new JLabel( text );
 
-            region.setForeground(Color.white);
-            region.setFont(getFont().deriveFont(18f));
-            region.setHorizontalAlignment(JLabel.CENTER);
-            region.setVerticalAlignment(JLabel.CENTER);
+			region.setForeground( Color.white );
+			region.setFont( getFont().deriveFont( 18f ) );
+			region.setHorizontalAlignment( JLabel.CENTER );
+			region.setVerticalAlignment( JLabel.CENTER );
 
-            return region;
-        }
-    }
+			return region;
+		}
+	}
 }

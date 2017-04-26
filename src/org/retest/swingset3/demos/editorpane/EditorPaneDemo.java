@@ -49,105 +49,100 @@ import org.retest.swingset3.DemoProperties;
  * @version 1.12 05/11/17
  * @author Jeff Dinkins
  */
-@DemoProperties(
-        value = "JEditorPane Demo",
-        category = "Text",
-        description = "Demonstrates JEditorPane, a text component which supports display and editing of rich text formats (such as HTML)",
-        sourceFiles = {
-                "org/retest/swingset3/demos/editorpane/EditorPaneDemo.java",
-                "org/retest/swingset3/demos/editorpane/book/ant.html",
-                "org/retest/swingset3/demos/editorpane/book/bug.html",
-                "org/retest/swingset3/demos/editorpane/book/index.html",
-                "org/retest/swingset3/demos/editorpane/book/king.html",
-                "org/retest/swingset3/demos/editorpane/book/preface.html",
-                "org/retest/swingset3/demos/editorpane/book/seaweed.html",
-                "org/retest/swingset3/demos/editorpane/book/title.html",
-                "org/retest/swingset3/demos/editorpane/book/editorpane/back.jpg",
-                "org/retest/swingset3/demos/editorpane/book/editorpane/forward.jpg",
-                "org/retest/swingset3/demos/editorpane/book/editorpane/header.jpg",
-                "org/retest/swingset3/demos/editorpane/book/Octavo/ant.jpg",
-                "org/retest/swingset3/demos/editorpane/book/Octavo/book.jpg",
-                "org/retest/swingset3/demos/editorpane/book/Octavo/bug.jpg",
-                "org/retest/swingset3/demos/editorpane/book/Octavo/bug2.jpg",
-                "org/retest/swingset3/demos/editorpane/book/Octavo/COPYRIGHT",
-                "org/retest/swingset3/demos/editorpane/book/Octavo/crest.jpg",
-                "org/retest/swingset3/demos/editorpane/book/Octavo/king.jpg",
-                "org/retest/swingset3/demos/editorpane/book/Octavo/micro.jpg",
-                "org/retest/swingset3/demos/editorpane/book/Octavo/seaweed.jpg",
-                "org/retest/swingset3/demos/editorpane/resources/EditorPaneDemo.properties",
-                "org/retest/swingset3/demos/editorpane/resources/images/EditorPaneDemo.gif"
-                }
-)
+@DemoProperties( value = "JEditorPane Demo", category = "Text",
+		description = "Demonstrates JEditorPane, a text component which supports display and editing of rich text formats (such as HTML)",
+		sourceFiles = { "org/retest/swingset3/demos/editorpane/EditorPaneDemo.java",
+				"org/retest/swingset3/demos/editorpane/book/ant.html",
+				"org/retest/swingset3/demos/editorpane/book/bug.html",
+				"org/retest/swingset3/demos/editorpane/book/index.html",
+				"org/retest/swingset3/demos/editorpane/book/king.html",
+				"org/retest/swingset3/demos/editorpane/book/preface.html",
+				"org/retest/swingset3/demos/editorpane/book/seaweed.html",
+				"org/retest/swingset3/demos/editorpane/book/title.html",
+				"org/retest/swingset3/demos/editorpane/book/editorpane/back.jpg",
+				"org/retest/swingset3/demos/editorpane/book/editorpane/forward.jpg",
+				"org/retest/swingset3/demos/editorpane/book/editorpane/header.jpg",
+				"org/retest/swingset3/demos/editorpane/book/Octavo/ant.jpg",
+				"org/retest/swingset3/demos/editorpane/book/Octavo/book.jpg",
+				"org/retest/swingset3/demos/editorpane/book/Octavo/bug.jpg",
+				"org/retest/swingset3/demos/editorpane/book/Octavo/bug2.jpg",
+				"org/retest/swingset3/demos/editorpane/book/Octavo/COPYRIGHT",
+				"org/retest/swingset3/demos/editorpane/book/Octavo/crest.jpg",
+				"org/retest/swingset3/demos/editorpane/book/Octavo/king.jpg",
+				"org/retest/swingset3/demos/editorpane/book/Octavo/micro.jpg",
+				"org/retest/swingset3/demos/editorpane/book/Octavo/seaweed.jpg",
+				"org/retest/swingset3/demos/editorpane/resources/EditorPaneDemo.properties",
+				"org/retest/swingset3/demos/editorpane/resources/images/EditorPaneDemo.gif" } )
 public class EditorPaneDemo extends JPanel {
 
-    private JEditorPane html;
+	private JEditorPane html;
 
-    /**
-     * main method allows us to run as a standalone demo.
-     */
-    public static void main(String[] args) {
-        JFrame frame = new JFrame(EditorPaneDemo.class.getAnnotation(DemoProperties.class).value());
+	/**
+	 * main method allows us to run as a standalone demo.
+	 */
+	public static void main( String[] args ) {
+		JFrame frame = new JFrame( EditorPaneDemo.class.getAnnotation( DemoProperties.class ).value() );
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new EditorPaneDemo());
-        frame.setPreferredSize(new Dimension(800, 600));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
+		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		frame.getContentPane().add( new EditorPaneDemo() );
+		frame.setPreferredSize( new Dimension( 800, 600 ) );
+		frame.pack();
+		frame.setLocationRelativeTo( null );
+		frame.setVisible( true );
+	}
 
-    /**
-     * EditorPaneDemo Constructor
-     */
-    public EditorPaneDemo() {
-        setLayout(new BorderLayout());
+	/**
+	 * EditorPaneDemo Constructor
+	 */
+	public EditorPaneDemo() {
+		setLayout( new BorderLayout() );
 
-        try {
-            URL url;
-            // System.getProperty("user.dir") +
-            // System.getProperty("file.separator");
-            String path = null;
-            try {
-                path = "book/index.html";
-                url = getClass().getResource(path);
-            } catch (Exception e) {
-                System.err.println("Failed to open " + path);
-                url = null;
-            }
+		try {
+			URL url;
+			// System.getProperty("user.dir") +
+			// System.getProperty("file.separator");
+			String path = null;
+			try {
+				path = "book/index.html";
+				url = getClass().getResource( path );
+			} catch ( Exception e ) {
+				System.err.println( "Failed to open " + path );
+				url = null;
+			}
 
-            if (url != null) {
-                html = new JEditorPane(url);
-                html.setEditable(false);
-                html.addHyperlinkListener(createHyperLinkListener());
+			if ( url != null ) {
+				html = new JEditorPane( url );
+				html.setEditable( false );
+				html.addHyperlinkListener( createHyperLinkListener() );
 
-                JScrollPane scroller = new JScrollPane();
-                JViewport vp = scroller.getViewport();
-                vp.add(html);
-                add(scroller, BorderLayout.CENTER);
-            }
-        } catch (MalformedURLException e) {
-            System.out.println("Malformed URL: " + e);
-        } catch (IOException e) {
-            System.out.println("IOException: " + e);
-        }
-    }
+				JScrollPane scroller = new JScrollPane();
+				JViewport vp = scroller.getViewport();
+				vp.add( html );
+				add( scroller, BorderLayout.CENTER );
+			}
+		} catch ( MalformedURLException e ) {
+			System.out.println( "Malformed URL: " + e );
+		} catch ( IOException e ) {
+			System.out.println( "IOException: " + e );
+		}
+	}
 
-    private HyperlinkListener createHyperLinkListener() {
-        return new HyperlinkListener() {
-            public void hyperlinkUpdate(HyperlinkEvent e) {
-                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                    if (e instanceof HTMLFrameHyperlinkEvent) {
-                        ((HTMLDocument) html.getDocument()).processHTMLFrameHyperlinkEvent(
-                                (HTMLFrameHyperlinkEvent) e);
-                    } else {
-                        try {
-                            html.setPage(e.getURL());
-                        } catch (IOException ioe) {
-                            System.out.println("IOE: " + ioe);
-                        }
-                    }
-                }
-            }
-        };
-    }
+	private HyperlinkListener createHyperLinkListener() {
+		return new HyperlinkListener() {
+			public void hyperlinkUpdate( HyperlinkEvent e ) {
+				if ( e.getEventType() == HyperlinkEvent.EventType.ACTIVATED ) {
+					if ( e instanceof HTMLFrameHyperlinkEvent ) {
+						((HTMLDocument) html.getDocument())
+								.processHTMLFrameHyperlinkEvent( (HTMLFrameHyperlinkEvent) e );
+					} else {
+						try {
+							html.setPage( e.getURL() );
+						} catch ( IOException ioe ) {
+							System.out.println( "IOE: " + ioe );
+						}
+					}
+				}
+			}
+		};
+	}
 }

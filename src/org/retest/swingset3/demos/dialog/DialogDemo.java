@@ -43,122 +43,117 @@ import org.retest.swingset3.demos.DemoUtilities;
  *
  * @author aim
  */
-@DemoProperties(
-        value = "JDialog Demo",
-        category = "Toplevel Containers",
-        description = "Demonstrates JDialog, Swing's top-level dialog container.",
-        sourceFiles = {
-                "org/retest/swingset3/demos/dialog/DialogDemo.java",
-                "org/retest/swingset3/demos/DemoUtilities.java",
-                "org/retest/swingset3/demos/dialog/resources/DialogDemo.html",
-                "org/retest/swingset3/demos/dialog/resources/images/DialogDemo.gif"
-                }
-)
-public class DialogDemo extends JPanel { 
-    
-    private JDialog dialog;
-    
-    private JComponent dialogSpaceholder;    
-        
-    public DialogDemo() {        
-        initComponents();
-    }
-    
-    protected void initComponents() {
-        dialog = createDialog();
+@DemoProperties( value = "JDialog Demo", category = "Toplevel Containers",
+		description = "Demonstrates JDialog, Swing's top-level dialog container.",
+		sourceFiles = { "org/retest/swingset3/demos/dialog/DialogDemo.java",
+				"org/retest/swingset3/demos/DemoUtilities.java",
+				"org/retest/swingset3/demos/dialog/resources/DialogDemo.html",
+				"org/retest/swingset3/demos/dialog/resources/images/DialogDemo.gif" } )
+public class DialogDemo extends JPanel {
 
-        setLayout(new BorderLayout()); 
-        
-        add(createControlPanel(), BorderLayout.WEST);
-        dialogSpaceholder = createDialogSpaceholder(dialog);
-        add(dialogSpaceholder, BorderLayout.CENTER);
-    }
-                
-    private static JComponent createDialogSpaceholder(JDialog dialog) {
-        // Create placeholder panel to provide space in which to
-        // display the toplevel dialog so that the control panel is not
-        // obscured by it.
-        JPanel placeholder = new JPanel();
-        Dimension prefSize = dialog.getPreferredSize();
-        prefSize.width += 12;
-        prefSize.height += 12;
-        placeholder.setPreferredSize(prefSize);
-        return placeholder;
-    }
-    
-    protected JComponent createControlPanel() {
-        // Create control panel on Left
-        Box panel = Box.createVerticalBox();
-        panel.setBorder(new EmptyBorder(8, 8, 8, 8));
-        
-        // Create button to control visibility of frame
-        JButton showButton = new JButton("Show JDialog...");
-        showButton.addActionListener(new ShowActionListener());
-        panel.add(showButton); 
-        
-        return panel;
-    }
-    
-    private static JDialog createDialog() {
- 
-        //<snip>Create dialog
-        JDialog dialog = new JDialog(new JFrame(), "Demo JDialog", false);
-        //</snip>
-        
-        //<snip>Add dialog's content
-        JLabel label = new JLabel("I'm content.");
-        label.setHorizontalAlignment(JLabel.CENTER);
-        label.setPreferredSize(new Dimension(200,140));
-        dialog.add(label);
-        //</snip>
-        
-        //<snip>Initialize dialog's size
-        // which will shrink-to-fit its contents
-        dialog.pack(); 
-        //</snip>
-        
-        return dialog;
-    }
-    
-    public void start() {
-        DemoUtilities.setToplevelLocation(dialog, dialogSpaceholder, SwingConstants.CENTER);
-        showDialog();
-    }
-    
-    public void stop() {
-        //<snip>Hide dialog
-        dialog.setVisible(false);
-        //</snip>
-    }
-    
-    public void showDialog() {
-        //<snip>Show dialog
-        // if dialog already visible, then bring to the front
-        if (dialog.isShowing()) {
-            dialog.toFront();
-        } else {
-            dialog.setVisible(true);
-        }
-        //</snip>
-    }
-    
-    private class ShowActionListener implements ActionListener {
-        public void actionPerformed(ActionEvent actionEvent) {
-            showDialog();
-        }
-    }
+	private JDialog dialog;
 
-    public static void main(String args[]) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new JFrame();
-                DialogDemo demo = new DialogDemo();
-                frame.add(demo);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
-                demo.start();
-            }
-        });
-    }
+	private JComponent dialogSpaceholder;
+
+	public DialogDemo() {
+		initComponents();
+	}
+
+	protected void initComponents() {
+		dialog = createDialog();
+
+		setLayout( new BorderLayout() );
+
+		add( createControlPanel(), BorderLayout.WEST );
+		dialogSpaceholder = createDialogSpaceholder( dialog );
+		add( dialogSpaceholder, BorderLayout.CENTER );
+	}
+
+	private static JComponent createDialogSpaceholder( JDialog dialog ) {
+		// Create placeholder panel to provide space in which to
+		// display the toplevel dialog so that the control panel is not
+		// obscured by it.
+		JPanel placeholder = new JPanel();
+		Dimension prefSize = dialog.getPreferredSize();
+		prefSize.width += 12;
+		prefSize.height += 12;
+		placeholder.setPreferredSize( prefSize );
+		return placeholder;
+	}
+
+	protected JComponent createControlPanel() {
+		// Create control panel on Left
+		Box panel = Box.createVerticalBox();
+		panel.setBorder( new EmptyBorder( 8, 8, 8, 8 ) );
+
+		// Create button to control visibility of frame
+		JButton showButton = new JButton( "Show JDialog..." );
+		showButton.addActionListener( new ShowActionListener() );
+		panel.add( showButton );
+
+		return panel;
+	}
+
+	private static JDialog createDialog() {
+
+		//<snip>Create dialog
+		JDialog dialog = new JDialog( new JFrame(), "Demo JDialog", false );
+		//</snip>
+
+		//<snip>Add dialog's content
+		JLabel label = new JLabel( "I'm content." );
+		label.setHorizontalAlignment( JLabel.CENTER );
+		label.setPreferredSize( new Dimension( 200, 140 ) );
+		dialog.add( label );
+		//</snip>
+
+		//<snip>Initialize dialog's size
+		// which will shrink-to-fit its contents
+		dialog.pack();
+		//</snip>
+
+		return dialog;
+	}
+
+	public void start() {
+		DemoUtilities.setToplevelLocation( dialog, dialogSpaceholder, SwingConstants.CENTER );
+		showDialog();
+	}
+
+	public void stop() {
+		//<snip>Hide dialog
+		dialog.setVisible( false );
+		//</snip>
+	}
+
+	public void showDialog() {
+		//<snip>Show dialog
+		// if dialog already visible, then bring to the front
+		if ( dialog.isShowing() ) {
+			dialog.toFront();
+		} else {
+			dialog.setVisible( true );
+		}
+		//</snip>
+	}
+
+	private class ShowActionListener implements ActionListener {
+		public void actionPerformed( ActionEvent actionEvent ) {
+			showDialog();
+		}
+	}
+
+	public static void main( String args[] ) {
+		EventQueue.invokeLater( new Runnable() {
+			public void run() {
+				JFrame frame = new JFrame();
+				DialogDemo demo = new DialogDemo();
+				frame.add( demo );
+				frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+				frame.pack();
+				frame.setVisible( true );
+				demo.start();
+			}
+		} );
+	}
 }

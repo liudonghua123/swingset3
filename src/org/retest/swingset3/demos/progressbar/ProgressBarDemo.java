@@ -45,156 +45,146 @@ import org.retest.swingset3.demos.ResourceManager;
  * JProgressBar Demo
  *
  * @version 1.12 11/17/05
- * @author Jeff Dinkins
- # @author Peter Korn (accessibility support)
+ * @author Jeff Dinkins # @author Peter Korn (accessibility support)
  */
-@DemoProperties(
-        value = "ProgressBar Demo",
-        category = "Controls",
-        description = "Demonstrates the JProgressBar, a control which displays progress to the user",
-        sourceFiles = {
-                "org/retest/swingset3/demos/progressbar/ProgressBarDemo.java",
-                "org/retest/swingset3/demos/ResourceManager.java",
-                "org/retest/swingset3/demos/progressbar/resources/ProgressBarDemo.properties",
-                "org/retest/swingset3/demos/progressbar/resources/images/ProgressBarDemo.gif"
-                }
-)
+@DemoProperties( value = "ProgressBar Demo", category = "Controls",
+		description = "Demonstrates the JProgressBar, a control which displays progress to the user",
+		sourceFiles = { "org/retest/swingset3/demos/progressbar/ProgressBarDemo.java",
+				"org/retest/swingset3/demos/ResourceManager.java",
+				"org/retest/swingset3/demos/progressbar/resources/ProgressBarDemo.properties",
+				"org/retest/swingset3/demos/progressbar/resources/images/ProgressBarDemo.gif" } )
 public class ProgressBarDemo extends JPanel {
-    private final ResourceManager resourceManager = new ResourceManager(this.getClass());
+	private final ResourceManager resourceManager = new ResourceManager( this.getClass() );
 
-    /**
-     * main method allows us to run as a standalone demo.
-     */
-    public static void main(String[] args) {
-        JFrame frame = new JFrame(ProgressBarDemo.class.getAnnotation(DemoProperties.class).value());
-        
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new ProgressBarDemo());
-        frame.setPreferredSize(new Dimension(800, 600));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
+	/**
+	 * main method allows us to run as a standalone demo.
+	 */
+	public static void main( String[] args ) {
+		JFrame frame = new JFrame( ProgressBarDemo.class.getAnnotation( DemoProperties.class ).value() );
 
-    /**
-     * ProgressBarDemo Constructor
-     */
-    public ProgressBarDemo() {
-        createProgressPanel();
-    }
+		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		frame.getContentPane().add( new ProgressBarDemo() );
+		frame.setPreferredSize( new Dimension( 800, 600 ) );
+		frame.pack();
+		frame.setLocationRelativeTo( null );
+		frame.setVisible( true );
+	}
 
-    private final javax.swing.Timer timer = new javax.swing.Timer(18, createTextLoadAction());
-    private Action loadAction;
-    private Action stopAction;
-    private JProgressBar progressBar;
-    private JTextArea progressTextArea;
+	/**
+	 * ProgressBarDemo Constructor
+	 */
+	public ProgressBarDemo() {
+		createProgressPanel();
+	}
 
-    private void createProgressPanel() {
-        setLayout(new BorderLayout());
+	private final javax.swing.Timer timer = new javax.swing.Timer( 18, createTextLoadAction() );
+	private Action loadAction;
+	private Action stopAction;
+	private JProgressBar progressBar;
+	private JTextArea progressTextArea;
 
-        JPanel textWrapper = new JPanel(new BorderLayout());
-        textWrapper.setBorder(new SoftBevelBorder(BevelBorder.LOWERED));
-        textWrapper.setAlignmentX(LEFT_ALIGNMENT);
-        progressTextArea = new MyTextArea();
+	private void createProgressPanel() {
+		setLayout( new BorderLayout() );
 
-        progressTextArea.getAccessibleContext().setAccessibleName(
-                resourceManager.getString("ProgressBarDemo.accessible_text_area_name"));
-        progressTextArea.getAccessibleContext().setAccessibleName(
-                resourceManager.getString("ProgressBarDemo.accessible_text_area_description"));
-        textWrapper.add(new JScrollPane(progressTextArea), BorderLayout.CENTER);
+		JPanel textWrapper = new JPanel( new BorderLayout() );
+		textWrapper.setBorder( new SoftBevelBorder( BevelBorder.LOWERED ) );
+		textWrapper.setAlignmentX( LEFT_ALIGNMENT );
+		progressTextArea = new MyTextArea();
 
-        add(textWrapper, BorderLayout.CENTER);
+		progressTextArea.getAccessibleContext()
+				.setAccessibleName( resourceManager.getString( "ProgressBarDemo.accessible_text_area_name" ) );
+		progressTextArea.getAccessibleContext()
+				.setAccessibleName( resourceManager.getString( "ProgressBarDemo.accessible_text_area_description" ) );
+		textWrapper.add( new JScrollPane( progressTextArea ), BorderLayout.CENTER );
 
-        JPanel progressPanel = new JPanel();
-        add(progressPanel, BorderLayout.SOUTH);
+		add( textWrapper, BorderLayout.CENTER );
 
-        progressBar = new JProgressBar(JProgressBar.HORIZONTAL, 0, text.length()) {
-            public Dimension getPreferredSize() {
-                return new Dimension(300, super.getPreferredSize().height);
-            }
-        };
-        progressBar.getAccessibleContext().setAccessibleName(
-                resourceManager.getString("ProgressBarDemo.accessible_text_loading_progress"));
+		JPanel progressPanel = new JPanel();
+		add( progressPanel, BorderLayout.SOUTH );
 
-        progressPanel.add(progressBar);
-        progressPanel.add(createLoadButton());
-        progressPanel.add(createStopButton());
-    }
+		progressBar = new JProgressBar( JProgressBar.HORIZONTAL, 0, text.length() ) {
+			public Dimension getPreferredSize() {
+				return new Dimension( 300, super.getPreferredSize().height );
+			}
+		};
+		progressBar.getAccessibleContext()
+				.setAccessibleName( resourceManager.getString( "ProgressBarDemo.accessible_text_loading_progress" ) );
 
-    private JButton createLoadButton() {
-        loadAction = new AbstractAction(resourceManager.getString("ProgressBarDemo.start_button")) {
-            public void actionPerformed(ActionEvent e) {
-                loadAction.setEnabled(false);
-                stopAction.setEnabled(true);
-                if (progressBar.getValue() == progressBar.getMaximum()) {
-                    progressBar.setValue(0);
-                    textLocation = 0;
-                    progressTextArea.setText("");
-                }
-                timer.start();
-            }
-        };
-        return createButton(loadAction);
-    }
+		progressPanel.add( progressBar );
+		progressPanel.add( createLoadButton() );
+		progressPanel.add( createStopButton() );
+	}
 
-    private JButton createStopButton() {
-        stopAction = new AbstractAction(resourceManager.getString("ProgressBarDemo.stop_button")) {
-            public void actionPerformed(ActionEvent e) {
-                timer.stop();
-                loadAction.setEnabled(true);
-                stopAction.setEnabled(false);
-            }
-        };
-        return createButton(stopAction);
-    }
+	private JButton createLoadButton() {
+		loadAction = new AbstractAction( resourceManager.getString( "ProgressBarDemo.start_button" ) ) {
+			public void actionPerformed( ActionEvent e ) {
+				loadAction.setEnabled( false );
+				stopAction.setEnabled( true );
+				if ( progressBar.getValue() == progressBar.getMaximum() ) {
+					progressBar.setValue( 0 );
+					textLocation = 0;
+					progressTextArea.setText( "" );
+				}
+				timer.start();
+			}
+		};
+		return createButton( loadAction );
+	}
 
-    private static JButton createButton(Action a) {
-        JButton b = new JButton();
-        // setting the following client property informs the button to show
-        // the action text as it's name. The default is to not show the
-        // action text.
-        b.putClientProperty("displayActionText", Boolean.TRUE);
-        b.setAction(a);
-        return b;
-    }
+	private JButton createStopButton() {
+		stopAction = new AbstractAction( resourceManager.getString( "ProgressBarDemo.stop_button" ) ) {
+			public void actionPerformed( ActionEvent e ) {
+				timer.stop();
+				loadAction.setEnabled( true );
+				stopAction.setEnabled( false );
+			}
+		};
+		return createButton( stopAction );
+	}
 
+	private static JButton createButton( Action a ) {
+		JButton b = new JButton();
+		// setting the following client property informs the button to show
+		// the action text as it's name. The default is to not show the
+		// action text.
+		b.putClientProperty( "displayActionText", Boolean.TRUE );
+		b.setAction( a );
+		return b;
+	}
 
-    private int textLocation = 0;
+	private int textLocation = 0;
 
-    private final String text = resourceManager.getString("ProgressBarDemo.text");
+	private final String text = resourceManager.getString( "ProgressBarDemo.text" );
 
-    private Action createTextLoadAction() {
-        return new AbstractAction("text load action") {
-            public void actionPerformed(ActionEvent e) {
-                if (progressBar.getValue() < progressBar.getMaximum()) {
-                    progressBar.setValue(progressBar.getValue() + 1);
-                    progressTextArea.append(text.substring(textLocation, textLocation + 1));
-                    textLocation++;
-                } else {
-                    timer.stop();
-                    loadAction.setEnabled(true);
-                    stopAction.setEnabled(false);
-                }
-            }
-        };
-    }
+	private Action createTextLoadAction() {
+		return new AbstractAction( "text load action" ) {
+			public void actionPerformed( ActionEvent e ) {
+				if ( progressBar.getValue() < progressBar.getMaximum() ) {
+					progressBar.setValue( progressBar.getValue() + 1 );
+					progressTextArea.append( text.substring( textLocation, textLocation + 1 ) );
+					textLocation++;
+				} else {
+					timer.stop();
+					loadAction.setEnabled( true );
+					stopAction.setEnabled( false );
+				}
+			}
+		};
+	}
 
+	private static class MyTextArea extends JTextArea {
+		private MyTextArea() {
+			super( null, 0, 0 );
+			setEditable( false );
+			setText( "" );
+		}
 
-    private static class MyTextArea extends JTextArea {
-        private MyTextArea() {
-            super(null, 0, 0);
-            setEditable(false);
-            setText("");
-        }
+		public float getAlignmentX() {
+			return LEFT_ALIGNMENT;
+		}
 
-        public float getAlignmentX() {
-            return LEFT_ALIGNMENT;
-        }
-
-        public float getAlignmentY() {
-            return TOP_ALIGNMENT;
-        }
-    }
+		public float getAlignmentY() {
+			return TOP_ALIGNMENT;
+		}
+	}
 }
-
-

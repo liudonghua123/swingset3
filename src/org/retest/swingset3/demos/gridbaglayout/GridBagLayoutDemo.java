@@ -42,57 +42,49 @@ import org.retest.swingset3.DemoProperties;
  *
  * @author Pavel Porvatov
  */
-@DemoProperties(
-        value = "GridBagLayout Demo",
-        category = "Containers",
-        description = "Demonstrates GridBagLayout, a layout which allows to arrange components in containers.",
-        sourceFiles = {
-                "org/retest/swingset3/demos/gridbaglayout/GridBagLayoutDemo.java",
-                "org/retest/swingset3/demos/gridbaglayout/Calculator.java",
-                "org/retest/swingset3/demos/JGridPanel.java",
-                "org/retest/swingset3/demos/ResourceManager.java",
-                "org/retest/swingset3/demos/gridbaglayout/resources/GridBagLayoutDemo.properties",
-                "org/retest/swingset3/demos/gridbaglayout/resources/images/GridBagLayoutDemo.gif"
-                }
-)
+@DemoProperties( value = "GridBagLayout Demo", category = "Containers",
+		description = "Demonstrates GridBagLayout, a layout which allows to arrange components in containers.",
+		sourceFiles = { "org/retest/swingset3/demos/gridbaglayout/GridBagLayoutDemo.java",
+				"org/retest/swingset3/demos/gridbaglayout/Calculator.java",
+				"org/retest/swingset3/demos/JGridPanel.java", "org/retest/swingset3/demos/ResourceManager.java",
+				"org/retest/swingset3/demos/gridbaglayout/resources/GridBagLayoutDemo.properties",
+				"org/retest/swingset3/demos/gridbaglayout/resources/images/GridBagLayoutDemo.gif" } )
 public class GridBagLayoutDemo extends JPanel {
-    private final ResourceManager resourceManager = new ResourceManager(this.getClass());
+	private final ResourceManager resourceManager = new ResourceManager( this.getClass() );
 
-    private final JLabel lbCaption = new JLabel("<html>" +
-            resourceManager.getString("GridBagLayoutDemo.caption.text") + "</html>");
+	private final JLabel lbCaption =
+			new JLabel( "<html>" + resourceManager.getString( "GridBagLayoutDemo.caption.text" ) + "</html>" );
 
-    private final Calculator calculator = new Calculator();
+	private final Calculator calculator = new Calculator();
 
-    /**
-     * main method allows us to run as a standalone demo.
-     */
-    public static void main(String[] args) {
-        JFrame frame = new JFrame(GridBagLayoutDemo.class.getAnnotation(DemoProperties.class).value());
+	/**
+	 * main method allows us to run as a standalone demo.
+	 */
+	public static void main( String[] args ) {
+		JFrame frame = new JFrame( GridBagLayoutDemo.class.getAnnotation( DemoProperties.class ).value() );
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new GridBagLayoutDemo());
-        frame.setPreferredSize(new Dimension(800, 600));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
+		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		frame.getContentPane().add( new GridBagLayoutDemo() );
+		frame.setPreferredSize( new Dimension( 800, 600 ) );
+		frame.pack();
+		frame.setLocationRelativeTo( null );
+		frame.setVisible( true );
+	}
 
-    public GridBagLayoutDemo() {
-        setLayout(new BorderLayout());
+	public GridBagLayoutDemo() {
+		setLayout( new BorderLayout() );
 
-        initUI();
-    }
+		initUI();
+	}
 
-    private void initUI() {
-        JGridPanel pnContent = new JGridPanel(1, 0, 2);
+	private void initUI() {
+		JGridPanel pnContent = new JGridPanel( 1, 0, 2 );
 
-        pnContent.setBorderEqual(10);
+		pnContent.setBorderEqual( 10 );
 
-        pnContent.cell(lbCaption, JGridPanel.Layout.FILL).
-                cell().
-                cell(calculator, JGridPanel.Layout.CENTER, JGridPanel.Layout.FIRST).
-                cell();
+		pnContent.cell( lbCaption, JGridPanel.Layout.FILL ).cell()
+				.cell( calculator, JGridPanel.Layout.CENTER, JGridPanel.Layout.FIRST ).cell();
 
-        add(pnContent);
-    }
+		add( pnContent );
+	}
 }

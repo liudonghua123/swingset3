@@ -45,224 +45,224 @@ import org.retest.swingset3.demos.ResourceManager;
  */
 
 public class LayoutControlPanel extends JPanel implements SwingConstants {
-    private static final Dimension VGAP20 = new Dimension(1, 20);
+	private static final Dimension VGAP20 = new Dimension( 1, 20 );
 
-    private final boolean absolutePositions;
-    private ToggleButtonDemo demo = null;
+	private final boolean absolutePositions;
+	private ToggleButtonDemo demo = null;
 
-    // private ComponentOrientChanger componentOrientChanger = null;
+	// private ComponentOrientChanger componentOrientChanger = null;
 
-    LayoutControlPanel(ToggleButtonDemo demo, ResourceManager resourceManager) {
-        this.demo = demo;
+	LayoutControlPanel( ToggleButtonDemo demo, ResourceManager resourceManager ) {
+		this.demo = demo;
 
-        // this.componentOrientationChanger = componentOrientationChanger;
+		// this.componentOrientationChanger = componentOrientationChanger;
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setAlignmentX(LEFT_ALIGNMENT);
-        setAlignmentY(TOP_ALIGNMENT);
+		setLayout( new BoxLayout( this, BoxLayout.Y_AXIS ) );
+		setAlignmentX( LEFT_ALIGNMENT );
+		setAlignmentY( TOP_ALIGNMENT );
 
-        JLabel l;
+		JLabel l;
 
-        // If SwingSet has a ComponentOrientationChanger, then include control
-        // for choosing between absolute and relative positioning.  This will
-        // only happen when we're running on JDK 1.2 or above.
-        //
-        // if(componentOrientationChanger != null ) {
-        //     l = new JLabel("Positioning:");
-        //     add(l);
-        //
-        //    ButtonGroup group = new ButtonGroup();
-        //    PositioningListener positioningListener = new PositioningListener();
-        //    JRadioButton absolutePos = new JRadioButton("Absolute");
-        //    absolutePos.setMnemonic('a');
-        //    absolutePos.setToolTipText("Text/Content positioning is independant of line direction");
-        //    group.add(absolutePos);
-        //    absolutePos.addItemListener(positioningListener);
-        //    add(absolutePos);
-        //
-        //    JRadioButton relativePos = new JRadioButton("Relative");
-        //    relativePos.setMnemonic('r');
-        //    relativePos.setToolTipText("Text/Content positioning depends on line direction.");
-        //    group.add(relativePos);
-        //    relativePos.addItemListener(positioningListener);
-        //    add(relativePos);
-        //
-        //    add(Box.createRigidArea(demo.VGAP20));
-        //
-        //    absolutePositions = false;
-        //    relativePos.setSelected(true);
-        //
-        //    componentOrientationChanger.addActionListener( new OrientationChangeListener() );
-        //} else {
-        absolutePositions = true;
-        //}
+		// If SwingSet has a ComponentOrientationChanger, then include control
+		// for choosing between absolute and relative positioning.  This will
+		// only happen when we're running on JDK 1.2 or above.
+		//
+		// if(componentOrientationChanger != null ) {
+		//     l = new JLabel("Positioning:");
+		//     add(l);
+		//
+		//    ButtonGroup group = new ButtonGroup();
+		//    PositioningListener positioningListener = new PositioningListener();
+		//    JRadioButton absolutePos = new JRadioButton("Absolute");
+		//    absolutePos.setMnemonic('a');
+		//    absolutePos.setToolTipText("Text/Content positioning is independant of line direction");
+		//    group.add(absolutePos);
+		//    absolutePos.addItemListener(positioningListener);
+		//    add(absolutePos);
+		//
+		//    JRadioButton relativePos = new JRadioButton("Relative");
+		//    relativePos.setMnemonic('r');
+		//    relativePos.setToolTipText("Text/Content positioning depends on line direction.");
+		//    group.add(relativePos);
+		//    relativePos.addItemListener(positioningListener);
+		//    add(relativePos);
+		//
+		//    add(Box.createRigidArea(demo.VGAP20));
+		//
+		//    absolutePositions = false;
+		//    relativePos.setSelected(true);
+		//
+		//    componentOrientationChanger.addActionListener( new OrientationChangeListener() );
+		//} else {
+		absolutePositions = true;
+		//}
 
-        DirectionPanel textPosition = new DirectionPanel(true, "E", new TextPositionListener());
-        DirectionPanel labelAlignment = new DirectionPanel(true, "C", new LabelAlignmentListener());
+		DirectionPanel textPosition = new DirectionPanel( true, "E", new TextPositionListener() );
+		DirectionPanel labelAlignment = new DirectionPanel( true, "C", new LabelAlignmentListener() );
 
-        // Make sure the controls' text position and label alignment match
-        // the initial value of the associated direction panel.
-        for (JComponent control : demo.getCurrentControls()) {
-            setPosition(control, RIGHT, CENTER);
-            setAlignment(control, CENTER, CENTER);
-        }
+		// Make sure the controls' text position and label alignment match
+		// the initial value of the associated direction panel.
+		for ( JComponent control : demo.getCurrentControls() ) {
+			setPosition( control, RIGHT, CENTER );
+			setAlignment( control, CENTER, CENTER );
+		}
 
-        l = new JLabel(resourceManager.getString("LayoutControlPanel.textposition_label"));
-        add(l);
-        add(textPosition);
+		l = new JLabel( resourceManager.getString( "LayoutControlPanel.textposition_label" ) );
+		add( l );
+		add( textPosition );
 
-        add(Box.createRigidArea(VGAP20));
+		add( Box.createRigidArea( VGAP20 ) );
 
-        l = new JLabel(resourceManager.getString("LayoutControlPanel.contentalignment_label"));
-        add(l);
-        add(labelAlignment);
+		l = new JLabel( resourceManager.getString( "LayoutControlPanel.contentalignment_label" ) );
+		add( l );
+		add( labelAlignment );
 
-        add(Box.createGlue());
-    }
+		add( Box.createGlue() );
+	}
 
-    // Text Position Listener
-    private class TextPositionListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            JRadioButton rb = (JRadioButton) e.getSource();
-            if (!rb.isSelected()) {
-                return;
-            }
-            String cmd = rb.getActionCommand();
-            int hPos, vPos;
-            if (cmd.equals("NW")) {
-                hPos = LEFT;
-                vPos = TOP;
-            } else if (cmd.equals("N")) {
-                hPos = CENTER;
-                vPos = TOP;
-            } else if (cmd.equals("NE")) {
-                hPos = RIGHT;
-                vPos = TOP;
-            } else if (cmd.equals("W")) {
-                hPos = LEFT;
-                vPos = CENTER;
-            } else if (cmd.equals("C")) {
-                hPos = CENTER;
-                vPos = CENTER;
-            } else if (cmd.equals("E")) {
-                hPos = RIGHT;
-                vPos = CENTER;
-            } else if (cmd.equals("SW")) {
-                hPos = LEFT;
-                vPos = BOTTOM;
-            } else if (cmd.equals("S")) {
-                hPos = CENTER;
-                vPos = BOTTOM;
-            } else /*if(cmd.equals("SE"))*/ {
-                hPos = RIGHT;
-                vPos = BOTTOM;
-            }
-            for (JComponent control : demo.getCurrentControls()) {
-                setPosition(control, hPos, vPos);
-            }
-            demo.invalidate();
-            demo.validate();
-            demo.repaint();
-        }
-    }
+	// Text Position Listener
+	private class TextPositionListener implements ActionListener {
+		public void actionPerformed( ActionEvent e ) {
+			JRadioButton rb = (JRadioButton) e.getSource();
+			if ( !rb.isSelected() ) {
+				return;
+			}
+			String cmd = rb.getActionCommand();
+			int hPos, vPos;
+			if ( cmd.equals( "NW" ) ) {
+				hPos = LEFT;
+				vPos = TOP;
+			} else if ( cmd.equals( "N" ) ) {
+				hPos = CENTER;
+				vPos = TOP;
+			} else if ( cmd.equals( "NE" ) ) {
+				hPos = RIGHT;
+				vPos = TOP;
+			} else if ( cmd.equals( "W" ) ) {
+				hPos = LEFT;
+				vPos = CENTER;
+			} else if ( cmd.equals( "C" ) ) {
+				hPos = CENTER;
+				vPos = CENTER;
+			} else if ( cmd.equals( "E" ) ) {
+				hPos = RIGHT;
+				vPos = CENTER;
+			} else if ( cmd.equals( "SW" ) ) {
+				hPos = LEFT;
+				vPos = BOTTOM;
+			} else if ( cmd.equals( "S" ) ) {
+				hPos = CENTER;
+				vPos = BOTTOM;
+			} else /* if(cmd.equals("SE")) */ {
+				hPos = RIGHT;
+				vPos = BOTTOM;
+			}
+			for ( JComponent control : demo.getCurrentControls() ) {
+				setPosition( control, hPos, vPos );
+			}
+			demo.invalidate();
+			demo.validate();
+			demo.repaint();
+		}
+	}
 
-    // Label Alignment Listener
-    private class LabelAlignmentListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            JRadioButton rb = (JRadioButton) e.getSource();
-            if (!rb.isSelected()) {
-                return;
-            }
-            String cmd = rb.getActionCommand();
-            int hPos, vPos;
-            if (cmd.equals("NW")) {
-                hPos = LEFT;
-                vPos = TOP;
-            } else if (cmd.equals("N")) {
-                hPos = CENTER;
-                vPos = TOP;
-            } else if (cmd.equals("NE")) {
-                hPos = RIGHT;
-                vPos = TOP;
-            } else if (cmd.equals("W")) {
-                hPos = LEFT;
-                vPos = CENTER;
-            } else if (cmd.equals("C")) {
-                hPos = CENTER;
-                vPos = CENTER;
-            } else if (cmd.equals("E")) {
-                hPos = RIGHT;
-                vPos = CENTER;
-            } else if (cmd.equals("SW")) {
-                hPos = LEFT;
-                vPos = BOTTOM;
-            } else if (cmd.equals("S")) {
-                hPos = CENTER;
-                vPos = BOTTOM;
-            } else /*if(cmd.equals("SE"))*/ {
-                hPos = RIGHT;
-                vPos = BOTTOM;
-            }
-            for (JComponent control : demo.getCurrentControls()) {
-                setAlignment(control, hPos, vPos);
-                control.invalidate();
-            }
-            demo.invalidate();
-            demo.validate();
-            demo.repaint();
-        }
-    }
+	// Label Alignment Listener
+	private class LabelAlignmentListener implements ActionListener {
+		public void actionPerformed( ActionEvent e ) {
+			JRadioButton rb = (JRadioButton) e.getSource();
+			if ( !rb.isSelected() ) {
+				return;
+			}
+			String cmd = rb.getActionCommand();
+			int hPos, vPos;
+			if ( cmd.equals( "NW" ) ) {
+				hPos = LEFT;
+				vPos = TOP;
+			} else if ( cmd.equals( "N" ) ) {
+				hPos = CENTER;
+				vPos = TOP;
+			} else if ( cmd.equals( "NE" ) ) {
+				hPos = RIGHT;
+				vPos = TOP;
+			} else if ( cmd.equals( "W" ) ) {
+				hPos = LEFT;
+				vPos = CENTER;
+			} else if ( cmd.equals( "C" ) ) {
+				hPos = CENTER;
+				vPos = CENTER;
+			} else if ( cmd.equals( "E" ) ) {
+				hPos = RIGHT;
+				vPos = CENTER;
+			} else if ( cmd.equals( "SW" ) ) {
+				hPos = LEFT;
+				vPos = BOTTOM;
+			} else if ( cmd.equals( "S" ) ) {
+				hPos = CENTER;
+				vPos = BOTTOM;
+			} else /* if(cmd.equals("SE")) */ {
+				hPos = RIGHT;
+				vPos = BOTTOM;
+			}
+			for ( JComponent control : demo.getCurrentControls() ) {
+				setAlignment( control, hPos, vPos );
+				control.invalidate();
+			}
+			demo.invalidate();
+			demo.validate();
+			demo.repaint();
+		}
+	}
 
-    // Position
-    void setPosition(Component c, int hPos, int vPos) {
-        boolean ltr = c.getComponentOrientation().isLeftToRight();
-        if (absolutePositions) {
-            if (hPos == LEADING) {
-                hPos = ltr ? LEFT : RIGHT;
-            } else if (hPos == TRAILING) {
-                hPos = ltr ? RIGHT : LEFT;
-            }
-        } else {
-            if (hPos == LEFT) {
-                hPos = ltr ? LEADING : TRAILING;
-            } else if (hPos == RIGHT) {
-                hPos = ltr ? TRAILING : LEADING;
-            }
-        }
-        if (c instanceof AbstractButton) {
-            AbstractButton x = (AbstractButton) c;
-            x.setHorizontalTextPosition(hPos);
-            x.setVerticalTextPosition(vPos);
-        } else if (c instanceof JLabel) {
-            JLabel x = (JLabel) c;
-            x.setHorizontalTextPosition(hPos);
-            x.setVerticalTextPosition(vPos);
-        }
-    }
+	// Position
+	void setPosition( Component c, int hPos, int vPos ) {
+		boolean ltr = c.getComponentOrientation().isLeftToRight();
+		if ( absolutePositions ) {
+			if ( hPos == LEADING ) {
+				hPos = ltr ? LEFT : RIGHT;
+			} else if ( hPos == TRAILING ) {
+				hPos = ltr ? RIGHT : LEFT;
+			}
+		} else {
+			if ( hPos == LEFT ) {
+				hPos = ltr ? LEADING : TRAILING;
+			} else if ( hPos == RIGHT ) {
+				hPos = ltr ? TRAILING : LEADING;
+			}
+		}
+		if ( c instanceof AbstractButton ) {
+			AbstractButton x = (AbstractButton) c;
+			x.setHorizontalTextPosition( hPos );
+			x.setVerticalTextPosition( vPos );
+		} else if ( c instanceof JLabel ) {
+			JLabel x = (JLabel) c;
+			x.setHorizontalTextPosition( hPos );
+			x.setVerticalTextPosition( vPos );
+		}
+	}
 
-    void setAlignment(Component c, int hPos, int vPos) {
-        boolean ltr = c.getComponentOrientation().isLeftToRight();
-        if (absolutePositions) {
-            if (hPos == LEADING) {
-                hPos = ltr ? LEFT : RIGHT;
-            } else if (hPos == TRAILING) {
-                hPos = ltr ? RIGHT : LEFT;
-            }
-        } else {
-            if (hPos == LEFT) {
-                hPos = ltr ? LEADING : TRAILING;
-            } else if (hPos == RIGHT) {
-                hPos = ltr ? TRAILING : LEADING;
-            }
-        }
-        if (c instanceof AbstractButton) {
-            AbstractButton x = (AbstractButton) c;
-            x.setHorizontalAlignment(hPos);
-            x.setVerticalAlignment(vPos);
-        } else if (c instanceof JLabel) {
-            JLabel x = (JLabel) c;
-            x.setHorizontalAlignment(hPos);
-            x.setVerticalAlignment(vPos);
-        }
-    }
+	void setAlignment( Component c, int hPos, int vPos ) {
+		boolean ltr = c.getComponentOrientation().isLeftToRight();
+		if ( absolutePositions ) {
+			if ( hPos == LEADING ) {
+				hPos = ltr ? LEFT : RIGHT;
+			} else if ( hPos == TRAILING ) {
+				hPos = ltr ? RIGHT : LEFT;
+			}
+		} else {
+			if ( hPos == LEFT ) {
+				hPos = ltr ? LEADING : TRAILING;
+			} else if ( hPos == RIGHT ) {
+				hPos = ltr ? TRAILING : LEADING;
+			}
+		}
+		if ( c instanceof AbstractButton ) {
+			AbstractButton x = (AbstractButton) c;
+			x.setHorizontalAlignment( hPos );
+			x.setVerticalAlignment( vPos );
+		} else if ( c instanceof JLabel ) {
+			JLabel x = (JLabel) c;
+			x.setHorizontalAlignment( hPos );
+			x.setVerticalAlignment( vPos );
+		}
+	}
 }

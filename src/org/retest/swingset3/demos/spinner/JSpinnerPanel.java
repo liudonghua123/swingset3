@@ -34,39 +34,38 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Arranges labels and spinners into two vertical columns.
- * Labels at the left, spinners at the right. 
+ * Arranges labels and spinners into two vertical columns. Labels at the left, spinners at the right.
+ * 
  * @author Mikhail Lapshin
  */
 //<snip>Helpful component for layout of labeled spinners
 public class JSpinnerPanel extends JPanel {
-    private final JPanel labelPanel;
-    private final JPanel spinnerPanel;
+	private final JPanel labelPanel;
+	private final JPanel spinnerPanel;
 
-    public JSpinnerPanel() {
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+	public JSpinnerPanel() {
+		setLayout( new BoxLayout( this, BoxLayout.X_AXIS ) );
 
-        labelPanel = new JPanel();
-        labelPanel.setLayout(new GridLayout(0, 1));
+		labelPanel = new JPanel();
+		labelPanel.setLayout( new GridLayout( 0, 1 ) );
 
-        spinnerPanel = new JPanel();
-        spinnerPanel.setLayout(new GridLayout(0, 1));
+		spinnerPanel = new JPanel();
+		spinnerPanel.setLayout( new GridLayout( 0, 1 ) );
 
-        add(labelPanel);
-        add(Box.createHorizontalStrut(5));
-        add(spinnerPanel);
-    }
+		add( labelPanel );
+		add( Box.createHorizontalStrut( 5 ) );
+		add( spinnerPanel );
+	}
 
-    public void addSpinner(String labelText, JSpinner spinner) {
-        JLabel label = new JLabel(labelText);
-        label.setHorizontalAlignment(SwingConstants.TRAILING);
-        labelPanel.add(label);
+	public void addSpinner( String labelText, JSpinner spinner ) {
+		JLabel label = new JLabel( labelText );
+		label.setHorizontalAlignment( SwingConstants.TRAILING );
+		labelPanel.add( label );
 
-        JPanel flowPanel = new JPanel();
-        flowPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 1));
-        flowPanel.add(spinner);
-        spinnerPanel.add(flowPanel);
-    }
+		JPanel flowPanel = new JPanel();
+		flowPanel.setLayout( new FlowLayout( FlowLayout.LEADING, 5, 1 ) );
+		flowPanel.add( spinner );
+		spinnerPanel.add( flowPanel );
+	}
 }
 //</snip>
-

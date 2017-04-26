@@ -44,122 +44,117 @@ import org.retest.swingset3.demos.DemoUtilities;
 /**
  * @author aim
  */
-@DemoProperties(
-        value = "JWindow Demo",
-        category = "Toplevel Containers",
-        description = "Demonstrates JWindow, a toplevel container with no system border.",
-        sourceFiles = {
-                "org/retest/swingset3/demos/window/WindowDemo.java",
-                "org/retest/swingset3/demos/DemoUtilities.java",
-                "org/retest/swingset3/demos/window/resources/WindowDemo.html",
-                "org/retest/swingset3/demos/window/resources/images/WindowDemo.gif"
-                }
-)
+@DemoProperties( value = "JWindow Demo", category = "Toplevel Containers",
+		description = "Demonstrates JWindow, a toplevel container with no system border.",
+		sourceFiles = { "org/retest/swingset3/demos/window/WindowDemo.java",
+				"org/retest/swingset3/demos/DemoUtilities.java",
+				"org/retest/swingset3/demos/window/resources/WindowDemo.html",
+				"org/retest/swingset3/demos/window/resources/images/WindowDemo.gif" } )
 public class WindowDemo extends JPanel {
 
-    private JWindow window;
+	private JWindow window;
 
-    private JComponent windowSpaceholder;
+	private JComponent windowSpaceholder;
 
-    public WindowDemo() {
-        initComponents();
-    }
+	public WindowDemo() {
+		initComponents();
+	}
 
-    protected void initComponents() {
-        window = createWindow();
+	protected void initComponents() {
+		window = createWindow();
 
-        setLayout(new BorderLayout());
-        add(createControlPanel(), BorderLayout.WEST);
-        windowSpaceholder = createWindowSpaceholder(window);
-        add(windowSpaceholder, BorderLayout.CENTER);
-    }
+		setLayout( new BorderLayout() );
+		add( createControlPanel(), BorderLayout.WEST );
+		windowSpaceholder = createWindowSpaceholder( window );
+		add( windowSpaceholder, BorderLayout.CENTER );
+	}
 
-    protected JComponent createControlPanel() {
-        Box controlPanel = Box.createVerticalBox();
-        controlPanel.setBorder(new EmptyBorder(8, 8, 8, 8));
+	protected JComponent createControlPanel() {
+		Box controlPanel = Box.createVerticalBox();
+		controlPanel.setBorder( new EmptyBorder( 8, 8, 8, 8 ) );
 
-        // Create button to control visibility of frame
-        JButton showButton = new JButton("Show JWindow...");
-        showButton.addActionListener(new ShowActionListener());
-        controlPanel.add(showButton);
+		// Create button to control visibility of frame
+		JButton showButton = new JButton( "Show JWindow..." );
+		showButton.addActionListener( new ShowActionListener() );
+		controlPanel.add( showButton );
 
-        return controlPanel;
-    }
+		return controlPanel;
+	}
 
-    private static JComponent createWindowSpaceholder(JWindow window) {
-        JPanel windowPlaceholder = new JPanel();
-        Dimension prefSize = window.getPreferredSize();
-        prefSize.width += 12;
-        prefSize.height += 12;
-        windowPlaceholder.setPreferredSize(prefSize);
+	private static JComponent createWindowSpaceholder( JWindow window ) {
+		JPanel windowPlaceholder = new JPanel();
+		Dimension prefSize = window.getPreferredSize();
+		prefSize.width += 12;
+		prefSize.height += 12;
+		windowPlaceholder.setPreferredSize( prefSize );
 
-        return windowPlaceholder;
-    }
+		return windowPlaceholder;
+	}
 
-    private static JWindow createWindow() {
+	private static JWindow createWindow() {
 
-        //<snip>Create window
-        JWindow window = new JWindow();
-        //</snip>
+		//<snip>Create window
+		JWindow window = new JWindow();
+		//</snip>
 
-        //<snip>Add a border to the window
-        window.getRootPane().setBorder(new LineBorder(Color.BLACK, 1));
-        //</snip>
+		//<snip>Add a border to the window
+		window.getRootPane().setBorder( new LineBorder( Color.BLACK, 1 ) );
+		//</snip>
 
-        //<snip>Add window's content
-        JLabel label = new JLabel("I have no system border.");
-        label.setHorizontalAlignment(JLabel.CENTER);
-        label.setPreferredSize(new Dimension(250, 200));
-        window.add(label);
-        //</snip>
+		//<snip>Add window's content
+		JLabel label = new JLabel( "I have no system border." );
+		label.setHorizontalAlignment( JLabel.CENTER );
+		label.setPreferredSize( new Dimension( 250, 200 ) );
+		window.add( label );
+		//</snip>
 
-        //<snip>Initialize window's size
-        // which will shrink-to-fit its contents
-        window.pack();
-        //</snip>
+		//<snip>Initialize window's size
+		// which will shrink-to-fit its contents
+		window.pack();
+		//</snip>
 
-        return window;
-    }
+		return window;
+	}
 
-    public void start() {
-        DemoUtilities.setToplevelLocation(window, windowSpaceholder, SwingConstants.CENTER);
-        showWindow();
-    }
+	public void start() {
+		DemoUtilities.setToplevelLocation( window, windowSpaceholder, SwingConstants.CENTER );
+		showWindow();
+	}
 
-    public void stop() {
-        //<snip>Hide window
-        window.setVisible(false);
-        //</snip>
-    }
+	public void stop() {
+		//<snip>Hide window
+		window.setVisible( false );
+		//</snip>
+	}
 
-    public void showWindow() {
-        //<snip>Show window
-        // if window already visible, then bring to the front
-        if (window.isShowing()) {
-            window.toFront();
-        } else {
-            window.setVisible(true);
-        }
-        //</snip>
-    }
+	public void showWindow() {
+		//<snip>Show window
+		// if window already visible, then bring to the front
+		if ( window.isShowing() ) {
+			window.toFront();
+		} else {
+			window.setVisible( true );
+		}
+		//</snip>
+	}
 
-    private class ShowActionListener implements ActionListener {
-        public void actionPerformed(ActionEvent actionEvent) {
-            showWindow();
-        }
-    }
+	private class ShowActionListener implements ActionListener {
+		public void actionPerformed( ActionEvent actionEvent ) {
+			showWindow();
+		}
+	}
 
-    public static void main(String args[]) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new JFrame();
-                WindowDemo demo = new WindowDemo();
-                frame.add(demo);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
-                demo.start();
-            }
-        });
-    }
+	public static void main( String args[] ) {
+		EventQueue.invokeLater( new Runnable() {
+			public void run() {
+				JFrame frame = new JFrame();
+				WindowDemo demo = new WindowDemo();
+				frame.add( demo );
+				frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+				frame.pack();
+				frame.setVisible( true );
+				demo.start();
+			}
+		} );
+	}
 }

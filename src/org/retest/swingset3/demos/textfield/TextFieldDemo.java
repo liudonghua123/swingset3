@@ -47,131 +47,118 @@ import org.retest.swingset3.DemoProperties;
  *
  * @author Pavel Porvatov
  */
-@DemoProperties(
-        value = "TextField Demo",
-        category = "Text",
-        description = "Demonstrates the JTextField, a control which allows to input text",
-        sourceFiles = {
-                "org/retest/swingset3/demos/textfield/TextFieldDemo.java",
-                "org/retest/swingset3/demos/textfield/JHistoryTextField.java",
-                "org/retest/swingset3/demos/JGridPanel.java",
-                "org/retest/swingset3/demos/ResourceManager.java",
-                "org/retest/swingset3/demos/textfield/resources/TextFieldDemo.properties",
-                "org/retest/swingset3/demos/textfield/resources/images/TextFieldDemo.gif"
-                }
-)
+@DemoProperties( value = "TextField Demo", category = "Text",
+		description = "Demonstrates the JTextField, a control which allows to input text",
+		sourceFiles = { "org/retest/swingset3/demos/textfield/TextFieldDemo.java",
+				"org/retest/swingset3/demos/textfield/JHistoryTextField.java",
+				"org/retest/swingset3/demos/JGridPanel.java", "org/retest/swingset3/demos/ResourceManager.java",
+				"org/retest/swingset3/demos/textfield/resources/TextFieldDemo.properties",
+				"org/retest/swingset3/demos/textfield/resources/images/TextFieldDemo.gif" } )
 public class TextFieldDemo extends JPanel {
-    private final ResourceManager resourceManager = new ResourceManager(this.getClass());
+	private final ResourceManager resourceManager = new ResourceManager( this.getClass() );
 
-    private final JLabel lbHistoryTextField = new JLabel(resourceManager.getString("TextFieldDemo.historytextfield.text"));
+	private final JLabel lbHistoryTextField =
+			new JLabel( resourceManager.getString( "TextFieldDemo.historytextfield.text" ) );
 
-    private final JHistoryTextField tfHistory = new JHistoryTextField();
+	private final JHistoryTextField tfHistory = new JHistoryTextField();
 
-    private final JLabel lbDow = new JLabel(resourceManager.getString("TextFieldDemo.dow.text"));
+	private final JLabel lbDow = new JLabel( resourceManager.getString( "TextFieldDemo.dow.text" ) );
 
-    private final JFormattedTextField tfDow = new JFormattedTextField();
+	private final JFormattedTextField tfDow = new JFormattedTextField();
 
-    private final JButton btnGo = new JButton(resourceManager.getString("TextFieldDemo.go.text"));
+	private final JButton btnGo = new JButton( resourceManager.getString( "TextFieldDemo.go.text" ) );
 
-    private final JLabel lbDowResult = new JLabel();
+	private final JLabel lbDowResult = new JLabel();
 
-    private final JLabel lbPassword = new JLabel(resourceManager.getString("TextFieldDemo.password.text"));
+	private final JLabel lbPassword = new JLabel( resourceManager.getString( "TextFieldDemo.password.text" ) );
 
-    private final JPasswordField tfPassword1 = new JPasswordField(20);
+	private final JPasswordField tfPassword1 = new JPasswordField( 20 );
 
-    private final JPasswordField tfPassword2 = new JPasswordField(20);
+	private final JPasswordField tfPassword2 = new JPasswordField( 20 );
 
-    private final DocumentListener passwordListener = new DocumentListener() {
-        public void insertUpdate(DocumentEvent e) {
-            highlightPasswords();
-        }
+	private final DocumentListener passwordListener = new DocumentListener() {
+		public void insertUpdate( DocumentEvent e ) {
+			highlightPasswords();
+		}
 
-        public void removeUpdate(DocumentEvent e) {
-            highlightPasswords();
-        }
+		public void removeUpdate( DocumentEvent e ) {
+			highlightPasswords();
+		}
 
-        public void changedUpdate(DocumentEvent e) {
-            highlightPasswords();
-        }
+		public void changedUpdate( DocumentEvent e ) {
+			highlightPasswords();
+		}
 
-        private void highlightPasswords() {
-            Color color;
+		private void highlightPasswords() {
+			Color color;
 
-            if (tfPassword1.getPassword().length > 0 &&
-                    Arrays.equals(tfPassword1.getPassword(), tfPassword2.getPassword())) {
-                color = Color.GREEN;
-            } else {
-                color = UIManager.getColor("TextField.background");
-            }
+			if ( tfPassword1.getPassword().length > 0
+					&& Arrays.equals( tfPassword1.getPassword(), tfPassword2.getPassword() ) ) {
+				color = Color.GREEN;
+			} else {
+				color = UIManager.getColor( "TextField.background" );
+			}
 
-            tfPassword1.setBackground(color);
-            tfPassword2.setBackground(color);
-        }
-    };
+			tfPassword1.setBackground( color );
+			tfPassword2.setBackground( color );
+		}
+	};
 
-    /**
-     * main method allows us to run as a standalone demo.
-     */
-    public static void main(String[] args) {
-        JFrame frame = new JFrame(TextFieldDemo.class.getAnnotation(DemoProperties.class).value());
+	/**
+	 * main method allows us to run as a standalone demo.
+	 */
+	public static void main( String[] args ) {
+		JFrame frame = new JFrame( TextFieldDemo.class.getAnnotation( DemoProperties.class ).value() );
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new TextFieldDemo());
-        frame.setPreferredSize(new Dimension(800, 600));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
+		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		frame.getContentPane().add( new TextFieldDemo() );
+		frame.setPreferredSize( new Dimension( 800, 600 ) );
+		frame.pack();
+		frame.setLocationRelativeTo( null );
+		frame.setVisible( true );
+	}
 
-    public TextFieldDemo() {
-        setLayout(new BorderLayout());
+	public TextFieldDemo() {
+		setLayout( new BorderLayout() );
 
-        initUI();
+		initUI();
 
-        tfDow.setValue(new Date());
+		tfDow.setValue( new Date() );
 
-        btnGo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+		btnGo.addActionListener( new ActionListener() {
+			public void actionPerformed( ActionEvent e ) {
+				Calendar calendar = Calendar.getInstance( Locale.ENGLISH );
 
-                calendar.setTime((Date) tfDow.getValue());
+				calendar.setTime( (Date) tfDow.getValue() );
 
-                lbDowResult.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH));
-            }
-        });
+				lbDowResult.setText( calendar.getDisplayName( Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH ) );
+			}
+		} );
 
-        tfPassword1.getDocument().addDocumentListener(passwordListener);
+		tfPassword1.getDocument().addDocumentListener( passwordListener );
 
-        tfPassword2.getDocument().addDocumentListener(passwordListener);
-    }
+		tfPassword2.getDocument().addDocumentListener( passwordListener );
+	}
 
-    private void initUI() {
-        tfHistory.setHistory(Arrays.asList(resourceManager.getString("TextFieldDemo.history.words").split("\\,")));
+	private void initUI() {
+		tfHistory.setHistory(
+				Arrays.asList( resourceManager.getString( "TextFieldDemo.history.words" ).split( "\\," ) ) );
 
-        JGridPanel pnDow = new JGridPanel(3, 2);
+		JGridPanel pnDow = new JGridPanel( 3, 2 );
 
-        pnDow.cell(tfDow).
-                cell(btnGo).
-                cell(lbDowResult);
+		pnDow.cell( tfDow ).cell( btnGo ).cell( lbDowResult );
 
-        JGridPanel pnPassword = new JGridPanel(3, 2);
+		JGridPanel pnPassword = new JGridPanel( 3, 2 );
 
-        pnPassword.cell(tfPassword1).
-                cell(tfPassword2).
-                cell();
+		pnPassword.cell( tfPassword1 ).cell( tfPassword2 ).cell();
 
-        JGridPanel pnContent = new JGridPanel(1, 0, 6);
+		JGridPanel pnContent = new JGridPanel( 1, 0, 6 );
 
-        pnContent.setBorderEqual(10);
+		pnContent.setBorderEqual( 10 );
 
-        pnContent.cell(lbHistoryTextField).
-                cell(tfHistory).
-                cell(lbDow, new Insets(20, 0, 0, 0)).
-                cell(pnDow).
-                cell(lbPassword, new Insets(20, 0, 0, 0)).
-                cell(pnPassword).
-                cell();
+		pnContent.cell( lbHistoryTextField ).cell( tfHistory ).cell( lbDow, new Insets( 20, 0, 0, 0 ) ).cell( pnDow )
+				.cell( lbPassword, new Insets( 20, 0, 0, 0 ) ).cell( pnPassword ).cell();
 
-        add(pnContent);
-    }
+		add( pnContent );
+	}
 }

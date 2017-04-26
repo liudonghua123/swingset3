@@ -32,78 +32,75 @@
 package org.retest.swingset3.demos.list;
 
 /**
- * An object that implements a cheesy pseudorandom permutation of the integers
- * from zero to some user-specified value. (The permutation is a linear
- * function.)
+ * An object that implements a cheesy pseudorandom permutation of the integers from zero to some user-specified value.
+ * (The permutation is a linear function.)
  *
  * @version 1.9 11/17/05
  * @author Josh Bloch
  */
 class Permuter {
-    /**
-     * The size of the permutation.
-     */
-    private int modulus;
+	/**
+	 * The size of the permutation.
+	 */
+	private int modulus;
 
-    /**
-     * Nonnegative integer less than n that is relatively prime to m.
-     */
-    private int multiplier;
+	/**
+	 * Nonnegative integer less than n that is relatively prime to m.
+	 */
+	private int multiplier;
 
-    /**
-     * Pseudorandom nonnegative integer less than n.
-     */
-    private static final int ADDEND = 22;
+	/**
+	 * Pseudorandom nonnegative integer less than n.
+	 */
+	private static final int ADDEND = 22;
 
-    public Permuter(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException();
-        }
-        modulus = n;
-        if (n == 1) {
-            return;
-        }
+	public Permuter( int n ) {
+		if ( n < 0 ) {
+			throw new IllegalArgumentException();
+		}
+		modulus = n;
+		if ( n == 1 ) {
+			return;
+		}
 
-        // Initialize the multiplier and offset
-        multiplier = (int) Math.sqrt(n);
-        while (gcd(multiplier, n) != 1) {
-            if (++multiplier == n) {
-                multiplier = 1;
-            }
-        }
-    }
+		// Initialize the multiplier and offset
+		multiplier = (int) Math.sqrt( n );
+		while ( gcd( multiplier, n ) != 1 ) {
+			if ( ++multiplier == n ) {
+				multiplier = 1;
+			}
+		}
+	}
 
-    /**
-     * Returns the integer to which this permuter maps the specified integer.
-     * The specified integer must be between 0 and n-1, and the returned
-     * integer will be as well.
-     */
-    public int map(int i) {
-        return (multiplier * i + ADDEND) % modulus;
-    }
+	/**
+	 * Returns the integer to which this permuter maps the specified integer. The specified integer must be between 0
+	 * and n-1, and the returned integer will be as well.
+	 */
+	public int map( int i ) {
+		return (multiplier * i + ADDEND) % modulus;
+	}
 
-    /**
-     * Calculate GCD of a and b, which are assumed to be non-negative.
-     */
-    private static int gcd(int a, int b) {
-        while (b != 0) {
-            int tmp = a % b;
-            a = b;
-            b = tmp;
-        }
-        return a;
-    }
+	/**
+	 * Calculate GCD of a and b, which are assumed to be non-negative.
+	 */
+	private static int gcd( int a, int b ) {
+		while ( b != 0 ) {
+			int tmp = a % b;
+			a = b;
+			b = tmp;
+		}
+		return a;
+	}
 
-    /**
-     * Simple test.  Takes modulus on command line and prints out permutation.
-     */
-    public static void main(String[] args) {
-        int modulus = Integer.parseInt(args[0]);
-        Permuter p = new Permuter(modulus);
-        for (int i = 0; i < modulus; i++) {
-            System.out.print(p.map(i) + " ");
-        }
-        System.out.println();
-    }
+	/**
+	 * Simple test. Takes modulus on command line and prints out permutation.
+	 */
+	public static void main( String[] args ) {
+		int modulus = Integer.parseInt( args[0] );
+		Permuter p = new Permuter( modulus );
+		for ( int i = 0; i < modulus; i++ ) {
+			System.out.print( p.map( i ) + " " );
+		}
+		System.out.println();
+	}
 }
-

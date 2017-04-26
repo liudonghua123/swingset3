@@ -48,208 +48,202 @@ import org.retest.swingset3.demos.ResourceManager;
  * @version 1.11 11/17/05
  * @author Jeff Dinkins
  */
-@DemoProperties(
-        value = "JTabbedPane Demo",
-        category = "Containers",
-        description = "Demonstrates JTabbedPane, a container which allows tabbed navigation of components",
-        sourceFiles = {
-                "org/retest/swingset3/demos/tabbedpane/TabbedPaneDemo.java",
-                "org/retest/swingset3/demos/ResourceManager.java",
-                "org/retest/swingset3/demos/tabbedpane/resources/TabbedPaneDemo.properties",
-                "org/retest/swingset3/demos/tabbedpane/resources/images/blake.gif",
-                "org/retest/swingset3/demos/tabbedpane/resources/images/brooke.gif",
-                "org/retest/swingset3/demos/tabbedpane/resources/images/camille.jpg",
-                "org/retest/swingset3/demos/tabbedpane/resources/images/david.gif",
-                "org/retest/swingset3/demos/tabbedpane/resources/images/ewan.gif",
-                "org/retest/swingset3/demos/tabbedpane/resources/images/ewan.jpg",
-                "org/retest/swingset3/demos/tabbedpane/resources/images/miranda.jpg",
-                "org/retest/swingset3/demos/tabbedpane/resources/images/matthew.gif",
-                "org/retest/swingset3/demos/tabbedpane/resources/images/stephen.gif",
-                "org/retest/swingset3/demos/tabbedpane/resources/images/TabbedPaneDemo.gif"
-                }
-)
+@DemoProperties( value = "JTabbedPane Demo", category = "Containers",
+		description = "Demonstrates JTabbedPane, a container which allows tabbed navigation of components",
+		sourceFiles = { "org/retest/swingset3/demos/tabbedpane/TabbedPaneDemo.java",
+				"org/retest/swingset3/demos/ResourceManager.java",
+				"org/retest/swingset3/demos/tabbedpane/resources/TabbedPaneDemo.properties",
+				"org/retest/swingset3/demos/tabbedpane/resources/images/blake.gif",
+				"org/retest/swingset3/demos/tabbedpane/resources/images/brooke.gif",
+				"org/retest/swingset3/demos/tabbedpane/resources/images/camille.jpg",
+				"org/retest/swingset3/demos/tabbedpane/resources/images/david.gif",
+				"org/retest/swingset3/demos/tabbedpane/resources/images/ewan.gif",
+				"org/retest/swingset3/demos/tabbedpane/resources/images/ewan.jpg",
+				"org/retest/swingset3/demos/tabbedpane/resources/images/miranda.jpg",
+				"org/retest/swingset3/demos/tabbedpane/resources/images/matthew.gif",
+				"org/retest/swingset3/demos/tabbedpane/resources/images/stephen.gif",
+				"org/retest/swingset3/demos/tabbedpane/resources/images/TabbedPaneDemo.gif" } )
 public class TabbedPaneDemo extends JPanel implements ActionListener {
-    private final ResourceManager resourceManager = new ResourceManager(this.getClass());
+	private final ResourceManager resourceManager = new ResourceManager( this.getClass() );
 
-    private final HeadSpin spin;
+	private final HeadSpin spin;
 
-    private final JTabbedPane tabbedpane;
+	private final JTabbedPane tabbedpane;
 
-    private final ButtonGroup group;
+	private final ButtonGroup group;
 
-    private final JRadioButton top;
-    private final JRadioButton bottom;
-    private final JRadioButton left;
-    private final JRadioButton right;
+	private final JRadioButton top;
+	private final JRadioButton bottom;
+	private final JRadioButton left;
+	private final JRadioButton right;
 
-    /**
-     * main method allows us to run as a standalone demo.
-     */
-    public static void main(String[] args) {
-        JFrame frame = new JFrame(TabbedPaneDemo.class.getAnnotation(DemoProperties.class).value());
+	/**
+	 * main method allows us to run as a standalone demo.
+	 */
+	public static void main( String[] args ) {
+		JFrame frame = new JFrame( TabbedPaneDemo.class.getAnnotation( DemoProperties.class ).value() );
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new TabbedPaneDemo());
-        frame.setPreferredSize(new Dimension(800, 600));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
+		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		frame.getContentPane().add( new TabbedPaneDemo() );
+		frame.setPreferredSize( new Dimension( 800, 600 ) );
+		frame.pack();
+		frame.setLocationRelativeTo( null );
+		frame.setVisible( true );
+	}
 
-    /**
-     * TabbedPaneDemo Constructor
-     */
-    public TabbedPaneDemo() {
-        setLayout(new BorderLayout());
+	/**
+	 * TabbedPaneDemo Constructor
+	 */
+	public TabbedPaneDemo() {
+		setLayout( new BorderLayout() );
 
-        // create tab position controls
-        JPanel tabControls = new JPanel();
-        tabControls.add(new JLabel(resourceManager.getString("TabbedPaneDemo.label")));
-        top = (JRadioButton) tabControls.add(new JRadioButton(resourceManager.getString("TabbedPaneDemo.top")));
-        left = (JRadioButton) tabControls.add(new JRadioButton(resourceManager.getString("TabbedPaneDemo.left")));
-        bottom = (JRadioButton) tabControls.add(new JRadioButton(resourceManager.getString("TabbedPaneDemo.bottom")));
-        right = (JRadioButton) tabControls.add(new JRadioButton(resourceManager.getString("TabbedPaneDemo.right")));
-        add(tabControls, BorderLayout.NORTH);
+		// create tab position controls
+		JPanel tabControls = new JPanel();
+		tabControls.add( new JLabel( resourceManager.getString( "TabbedPaneDemo.label" ) ) );
+		top = (JRadioButton) tabControls.add( new JRadioButton( resourceManager.getString( "TabbedPaneDemo.top" ) ) );
+		left = (JRadioButton) tabControls.add( new JRadioButton( resourceManager.getString( "TabbedPaneDemo.left" ) ) );
+		bottom = (JRadioButton) tabControls
+				.add( new JRadioButton( resourceManager.getString( "TabbedPaneDemo.bottom" ) ) );
+		right = (JRadioButton) tabControls
+				.add( new JRadioButton( resourceManager.getString( "TabbedPaneDemo.right" ) ) );
+		add( tabControls, BorderLayout.NORTH );
 
-        group = new ButtonGroup();
-        group.add(top);
-        group.add(bottom);
-        group.add(left);
-        group.add(right);
+		group = new ButtonGroup();
+		group.add( top );
+		group.add( bottom );
+		group.add( left );
+		group.add( right );
 
-        top.setSelected(true);
+		top.setSelected( true );
 
-        top.addActionListener(this);
-        bottom.addActionListener(this);
-        left.addActionListener(this);
-        right.addActionListener(this);
+		top.addActionListener( this );
+		bottom.addActionListener( this );
+		left.addActionListener( this );
+		right.addActionListener( this );
 
-        // create tab 
-        tabbedpane = new JTabbedPane();
-        add(tabbedpane, BorderLayout.CENTER);
+		// create tab 
+		tabbedpane = new JTabbedPane();
+		add( tabbedpane, BorderLayout.CENTER );
 
-        String name = resourceManager.getString("TabbedPaneDemo.camille");
-        JLabel pix = new JLabel(resourceManager.createImageIcon("camille.jpg", name));
-        tabbedpane.add(name, pix);
+		String name = resourceManager.getString( "TabbedPaneDemo.camille" );
+		JLabel pix = new JLabel( resourceManager.createImageIcon( "camille.jpg", name ) );
+		tabbedpane.add( name, pix );
 
-        name = resourceManager.getString("TabbedPaneDemo.miranda");
-        pix = new JLabel(resourceManager.createImageIcon("miranda.jpg", name));
-        pix.setToolTipText(resourceManager.getString("TabbedPaneDemo.miranda.tooltip"));
-        tabbedpane.add(name, pix);
-        
-        name = resourceManager.getString("TabbedPaneDemo.ewan");
-        pix = new JLabel(resourceManager.createImageIcon("ewan.jpg", name));
-        tabbedpane.add(name, pix);
-        
-        name = resourceManager.getString("TabbedPaneDemo.bounce");
-        spin = new HeadSpin();
-        tabbedpane.add(name, spin);
+		name = resourceManager.getString( "TabbedPaneDemo.miranda" );
+		pix = new JLabel( resourceManager.createImageIcon( "miranda.jpg", name ) );
+		pix.setToolTipText( resourceManager.getString( "TabbedPaneDemo.miranda.tooltip" ) );
+		tabbedpane.add( name, pix );
 
-        tabbedpane.getModel().addChangeListener(
-                new ChangeListener() {
-                    public void stateChanged(ChangeEvent e) {
-                        SingleSelectionModel model = (SingleSelectionModel) e.getSource();
-                        if (model.getSelectedIndex() == tabbedpane.getTabCount() - 1) {
-                            spin.go();
-                        }
-                    }
-                }
-        );
-    }
+		name = resourceManager.getString( "TabbedPaneDemo.ewan" );
+		pix = new JLabel( resourceManager.createImageIcon( "ewan.jpg", name ) );
+		tabbedpane.add( name, pix );
 
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == top) {
-            tabbedpane.setTabPlacement(JTabbedPane.TOP);
-        } else if (e.getSource() == left) {
-            tabbedpane.setTabPlacement(JTabbedPane.LEFT);
-        } else if (e.getSource() == bottom) {
-            tabbedpane.setTabPlacement(JTabbedPane.BOTTOM);
-        } else if (e.getSource() == right) {
-            tabbedpane.setTabPlacement(JTabbedPane.RIGHT);
-        }
-    }
+		name = resourceManager.getString( "TabbedPaneDemo.bounce" );
+		spin = new HeadSpin();
+		tabbedpane.add( name, spin );
 
-    private class HeadSpin extends JComponent implements ActionListener {
-        private javax.swing.Timer animator;
+		tabbedpane.getModel().addChangeListener( new ChangeListener() {
+			public void stateChanged( ChangeEvent e ) {
+				SingleSelectionModel model = (SingleSelectionModel) e.getSource();
+				if ( model.getSelectedIndex() == tabbedpane.getTabCount() - 1 ) {
+					spin.go();
+				}
+			}
+		} );
+	}
 
-        private final ImageIcon[] icon = new ImageIcon[6];
+	public void actionPerformed( ActionEvent e ) {
+		if ( e.getSource() == top ) {
+			tabbedpane.setTabPlacement( JTabbedPane.TOP );
+		} else if ( e.getSource() == left ) {
+			tabbedpane.setTabPlacement( JTabbedPane.LEFT );
+		} else if ( e.getSource() == bottom ) {
+			tabbedpane.setTabPlacement( JTabbedPane.BOTTOM );
+		} else if ( e.getSource() == right ) {
+			tabbedpane.setTabPlacement( JTabbedPane.RIGHT );
+		}
+	}
 
-        private final static int numImages = 6;
+	private class HeadSpin extends JComponent implements ActionListener {
+		private javax.swing.Timer animator;
 
-        private final double[] x = new double[numImages];
-        private final double[] y = new double[numImages];
+		private final ImageIcon[] icon = new ImageIcon[6];
 
-        private final int[] xh = new int[numImages];
-        private final int[] yh = new int[numImages];
+		private final static int numImages = 6;
 
-        private final double[] scale = new double[numImages];
+		private final double[] x = new double[numImages];
+		private final double[] y = new double[numImages];
 
-        private final Random rand = new Random();
+		private final int[] xh = new int[numImages];
+		private final int[] yh = new int[numImages];
 
-        public HeadSpin() {
-            setBackground(Color.black);
-            icon[0] = resourceManager.createImageIcon("ewan.gif", resourceManager.getString("TabbedPaneDemo.ewan"));
-            icon[1] = resourceManager.createImageIcon("stephen.gif", resourceManager.getString("TabbedPaneDemo.stephen"));
-            icon[2] = resourceManager.createImageIcon("david.gif", resourceManager.getString("TabbedPaneDemo.david"));
-            icon[3] = resourceManager.createImageIcon("matthew.gif", resourceManager.getString("TabbedPaneDemo.matthew"));
-            icon[4] = resourceManager.createImageIcon("blake.gif", resourceManager.getString("TabbedPaneDemo.blake"));
-            icon[5] = resourceManager.createImageIcon("brooke.gif", resourceManager.getString("TabbedPaneDemo.brooke"));
+		private final double[] scale = new double[numImages];
 
-            /*
-             for(int i = 0; i < 6; i++) {
-                 x[i] = (double) rand.nextInt(500);
-                 y[i] = (double) rand.nextInt(500);
-             }
-             */
-        }
+		private final Random rand = new Random();
 
-        public void go() {
-            animator = new javax.swing.Timer(22 + 22 + 22, this);
-            animator.start();
-        }
+		public HeadSpin() {
+			setBackground( Color.black );
+			icon[0] = resourceManager.createImageIcon( "ewan.gif", resourceManager.getString( "TabbedPaneDemo.ewan" ) );
+			icon[1] = resourceManager.createImageIcon( "stephen.gif",
+					resourceManager.getString( "TabbedPaneDemo.stephen" ) );
+			icon[2] =
+					resourceManager.createImageIcon( "david.gif", resourceManager.getString( "TabbedPaneDemo.david" ) );
+			icon[3] = resourceManager.createImageIcon( "matthew.gif",
+					resourceManager.getString( "TabbedPaneDemo.matthew" ) );
+			icon[4] =
+					resourceManager.createImageIcon( "blake.gif", resourceManager.getString( "TabbedPaneDemo.blake" ) );
+			icon[5] = resourceManager.createImageIcon( "brooke.gif",
+					resourceManager.getString( "TabbedPaneDemo.brooke" ) );
 
-        public void paint(Graphics g) {
-            g.setColor(getBackground());
-            g.fillRect(0, 0, getWidth(), getHeight());
+			/*
+			 * for(int i = 0; i < 6; i++) { x[i] = (double) rand.nextInt(500); y[i] = (double) rand.nextInt(500); }
+			 */
+		}
 
-            for (int i = 0; i < numImages; i++) {
-                if (x[i] > 3 * i) {
-                    nudge(i);
-                    squish(g, icon[i], xh[i], yh[i], scale[i]);
-                } else {
-                    x[i] += .05;
-                    y[i] += .05;
-                }
-            }
-        }
+		public void go() {
+			animator = new javax.swing.Timer( 22 + 22 + 22, this );
+			animator.start();
+		}
 
-        public void nudge(int i) {
-            x[i] += (double) rand.nextInt(1000) / 8756;
-            y[i] += (double) rand.nextInt(1000) / 5432;
-            int tmpScale = (int) (Math.abs(Math.sin(x[i])) * 10);
-            scale[i] = (double) tmpScale / 10;
-            int nudgeX = (int) (((double) getWidth() / 2) * .8);
-            int nudgeY = (int) (((double) getHeight() / 2) * .60);
-            xh[i] = (int) (Math.sin(x[i]) * nudgeX) + nudgeX;
-            yh[i] = (int) (Math.sin(y[i]) * nudgeY) + nudgeY;
-        }
+		public void paint( Graphics g ) {
+			g.setColor( getBackground() );
+			g.fillRect( 0, 0, getWidth(), getHeight() );
 
-        public void squish(Graphics g, ImageIcon icon, int x, int y, double scale) {
-            if (isVisible()) {
-                g.drawImage(icon.getImage(), x, y,
-                        (int) (icon.getIconWidth() * scale),
-                        (int) (icon.getIconHeight() * scale),
-                        this);
-            }
-        }
+			for ( int i = 0; i < numImages; i++ ) {
+				if ( x[i] > 3 * i ) {
+					nudge( i );
+					squish( g, icon[i], xh[i], yh[i], scale[i] );
+				} else {
+					x[i] += .05;
+					y[i] += .05;
+				}
+			}
+		}
 
-        public void actionPerformed(ActionEvent e) {
-            if (isVisible()) {
-                repaint();
-            } else {
-                animator.stop();
-            }
-        }
-    }
+		public void nudge( int i ) {
+			x[i] += (double) rand.nextInt( 1000 ) / 8756;
+			y[i] += (double) rand.nextInt( 1000 ) / 5432;
+			int tmpScale = (int) (Math.abs( Math.sin( x[i] ) ) * 10);
+			scale[i] = (double) tmpScale / 10;
+			int nudgeX = (int) (((double) getWidth() / 2) * .8);
+			int nudgeY = (int) (((double) getHeight() / 2) * .60);
+			xh[i] = (int) (Math.sin( x[i] ) * nudgeX) + nudgeX;
+			yh[i] = (int) (Math.sin( y[i] ) * nudgeY) + nudgeY;
+		}
+
+		public void squish( Graphics g, ImageIcon icon, int x, int y, double scale ) {
+			if ( isVisible() ) {
+				g.drawImage( icon.getImage(), x, y, (int) (icon.getIconWidth() * scale),
+						(int) (icon.getIconHeight() * scale), this );
+			}
+		}
+
+		public void actionPerformed( ActionEvent e ) {
+			if ( isVisible() ) {
+				repaint();
+			} else {
+				animator.stop();
+			}
+		}
+	}
 }
-
