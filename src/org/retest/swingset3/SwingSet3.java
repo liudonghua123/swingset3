@@ -33,6 +33,7 @@ package org.retest.swingset3;
 
 import org.retest.swingset3.utilities.AnimatingSplitPane;
 import org.retest.swingset3.utilities.Utilities;
+
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -45,6 +46,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.HierarchyEvent;
@@ -65,6 +67,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -207,7 +210,7 @@ public class SwingSet3 extends SingleFrameApplication  {
         title = resourceMap.getString("mainFrame.title");
         runningDemoCache = new HashMap<String, DemoPanel>();
         setDemoList(resourceMap.getString("demos.title"), getDemoClassNames(args));
-
+        
         IntroPanel intro = new IntroPanel();
         setDemoPlaceholder(intro);
 
@@ -307,8 +310,13 @@ public class SwingSet3 extends SingleFrameApplication  {
         
         applyDefaults();
         
-        // application framework should handle this
-        getMainFrame().setIconImage(resourceMap.getImageIcon("Application.icon").getImage());
+        JFrame mainFrame = getMainFrame();
+        // application framework should handle this        
+        mainFrame.setIconImage(resourceMap.getImageIcon("Application.icon").getImage());
+        mainFrame.setLocationRelativeTo(null);
+        
+		final LoginDialog login = new LoginDialog(mainFrame);
+		SwingUtilities.invokeLater(() -> login.setVisible(true)); 
         
         show(view);     
     } 
