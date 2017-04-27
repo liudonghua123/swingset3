@@ -36,31 +36,31 @@
 		<dependency>
 			<groupId>org.jdesktop</groupId>
 			<artifactId>AnimatedTransitions</artifactId>
-			<version>1.5.0_07-87</version>
+			<version>0.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jdesktop</groupId>
 			<artifactId>AppFramework</artifactId>
-			<version>1.6.0-b105</version>
+			<version>0.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jdesktop</groupId>
 			<artifactId>swing-worker</artifactId>
-			<version>1.5.0_08-b03</version>
+			<version>0.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jdesktop</groupId>
 			<artifactId>swingx</artifactId>
-			<version>1.5.0_07-87</version>
+			<version>0.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jdesktop</groupId>
 			<artifactId>TimingFramework</artifactId>
-			<version>1.6.0-rc-b103</version>
+			<version>0.0.1</version>
 		</dependency>
 
 	</dependencies>
