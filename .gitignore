@@ -1,7 +1,9 @@
 # Eclipse
 .classpath
 .project
-/bin/
+
+# Maven
+/target/
 
 # ReTest
 **/retest-workspace/recorded/201*-*
