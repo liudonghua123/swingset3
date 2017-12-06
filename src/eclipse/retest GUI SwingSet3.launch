@@ -33,6 +33,6 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="de.retest.gui.ReTestGui"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="retest-frontend-gui"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dde.retest.workDirectory=retest-workspace"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dde.retest.remote.enabled=true&#10;-Dde.retest.workDirectory=retest-workspace"/>
 <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:swingset3}"/>
 </launchConfiguration>
