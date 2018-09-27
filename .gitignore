@@ -5,14 +5,15 @@
 # Maven
 /target/
 
-# ReTest
-**/retest-workspace/recorded/201*-*
-**/retest-workspace/tests/201*-*
-**/retest-workspace/suites/201*-*
+# retest
+**/retest-workspace/crashes/*
 **/retest-workspace/execsuites/201*-*
 **/retest-workspace/execsuites/generated-suite_*
-
-**/retest-workspace/crashes/*
 **/retest-workspace/generations/*
-**/retest-workspace/testreports/*
 **/retest-workspace/logs/*
+**/retest-workspace/recorded/201*-*
+**/retest-workspace/suites/201*-*
+**/retest-workspace/tests/201*-*
+**/retest-workspace/testreports/*
+**/retest-workspace/boot/*
+**/retest-workspace/retest.license
