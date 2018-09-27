@@ -1,6 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
 
 	<name>SwingSet3</name>
@@ -9,7 +9,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<repositories>
-
 		<repository>
 			<id>local-maven-repo</id>
 			<url>file:///${basedir}/lib</url>
@@ -20,11 +19,9 @@
 				<updatePolicy>always</updatePolicy>
 			</snapshots>
 		</repository>
-
 	</repositories>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>javax.jnlp</groupId>
 			<artifactId>jnlp-api</artifactId>
@@ -62,26 +59,21 @@
 			<artifactId>TimingFramework</artifactId>
 			<version>1.6.0-rc-b103</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
-
 		<sourceDirectory>src</sourceDirectory>
 
 		<resources>
-
 			<resource>
 				<directory>src</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
 				</excludes>
 			</resource>
-
 		</resources>
 
 		<plugins>
-
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
@@ -117,10 +109,8 @@
 		</plugins>
 
 		<pluginManagement>
-
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
+				<!-- used to store Eclipse m2e settings only -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -146,7 +136,6 @@
 					</configuration>
 				</plugin>
 			</plugins>
-
 		</pluginManagement>
 
 	</build>
